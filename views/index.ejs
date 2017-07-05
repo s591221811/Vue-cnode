@@ -1,0 +1,296 @@
+
+<!-- 加载公共的头部 -->
+<% include layouts/header %>
+<div id='main'>
+  <div id='sidebar'>
+ 
+        <% if(user){ %>
+            <% include layouts/userInfo %>
+        <%}else{%>
+            <div class="panel">
+               <div class="inner">
+                    <p>CNode：Node.js专业中文社区</p>
+
+                    <div>
+                         您可以
+                        <a href="/signin">登录</a>
+                        或
+                        <a href="/signup">注册</a>
+                        , 也可以
+                        <a href="/auth/github">
+                          <span class="span-info">
+                            通过 GitHub 登录
+                          </span>
+                        </a>
+                    </div>
+                </div> 
+            </div>
+        <%} %> 
+ 
+
+
+<script>
+  $(document).ready(function () {
+    $('.follow_btn').click(function () {
+      var $me = $(this);
+      var action = $me.attr('action');
+      var params = {
+        follow_id: '59270cf09e32cc84569a7397',
+        _csrf: 'KdDaoW4y-4IG7fqaMmbZ3xqn1lMw5219eCGY'
+      };
+      $.post('/user/' + action, params, function (data) {
+        if (data.status === 'success') {
+          var $btns = $('.follow_btn');
+          if (action === 'follow') {
+            $btns.html('取消关注');
+            $btns.attr('action', 'un_follow');
+          } else {
+            $btns.html('加入关注');
+            $btns.attr('action', 'follow');
+          }
+          $btns.toggleClass('btn-success');
+        }
+      }, 'json');
+    });
+  });
+</script>
+
+
+    
+  
+    
+<div class='panel'>
+  <div class='inner ads'>
+
+    
+      
+      <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" class="banner sponsor_outlink"
+    data-label="alinode">
+        <img src="//dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&utm_medium=content_pic_pc&utm_campaign=multicloud&utm_content=gift&ytag=cnodejs" target="_blank" class="banner sponsor_outlink"
+    data-label="ucloud-banner">
+        <img src="//dn-cnode.qbox.me/FgQS-GQDfqwAD_v0NuhyYUOUk5MG">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="https://0x6.me/CnodeAD" target="_blank" class="banner sponsor_outlink"
+    data-label="huoqiu">
+        <img src="//dn-cnode.qbox.me/Fh-dDBC360-fT8gaefK0p_hmx_zv">
+      </a>
+    
+  </div>
+</div>
+
+  
+
+  
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>无人回复的话题</span>
+    </div>
+    <div class='inner'>
+      
+      <ul class="unstyled">
+            <% nores.forEach(function(item){%>
+  <li>
+  <div><a class='dark topic_title' href="/topic/592e987f855efbac2cf7a51e" title="<%=item.topicname%>"><%=item.topicname%></a>
+  </div>
+</li>
+
+        <%})%>
+
+      </ul>
+      
+    </div>
+  </div>
+  
+
+  
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>积分榜</span>
+      &nbsp;
+      <a class='dark' href='/users/top100'>TOP 100 &gt;&gt;</a>
+    </div>
+    <div class='inner'>
+      
+      <ol>
+      <% gold.forEach(function(item){%>
+      <li>
+      <span class='top_score'><%=item.gold%></span>
+      <span class="user_name"><a href="/user/i5ting"><%=item.username%></a></span>
+      </li>
+       <% })%>
+      
+
+
+      </ol>
+      
+    </div>
+  </div>
+  
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>友情社区</span>
+    </div>
+    <div class='inner'>
+      <ol class="friendship-community">
+        <li>
+          <a href="https://ruby-china.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://golangtc.com/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/golangtc-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://phphub.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/phphub-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="https://testerhome.com/" target="_blank">
+            <img src="//dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK">
+          </a>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>客户端二维码</span>
+    </div>
+    <div class='inner cnode-app-download'>
+      <img width='200' src="//dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU">
+      <br />
+      <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
+    </div>
+  </div>
+
+</div>
+
+
+<div id="content">
+  <div class="panel">
+    <div class="header">
+    <!-- 如果传输的类别id存在 证明点击过了 其他类别了 -->
+      <% if(cate){%>
+          <a href="/?tab=all"class="topic-tab ">全部</a>
+       <% }else{%>
+          <a href="/?tab=all"class="topic-tab current-tab">全部</a>
+       <%}%>
+        
+      
+        <a href="/?tab=good" class="topic-tab ">精华</a>
+      <!-- 查询话题的类别 -->
+      <% cates.forEach(function(item){%>
+          <a href="/?cate=<%=item._id%>"class="topic-tab <%= cate==item._id?'current-tab':''%>"><%=item.catename%></a>
+      <%})%> 
+    </div>
+    
+    <div class="inner no-padding">
+      <div id="topic_list">
+        <% data.forEach(function(itme){%>
+
+        <div class='cell'>
+            <a class="user_avatar pull-left" href="/user/lellansin">
+                <% if(itme.user.userpic){%>
+                     <img src="/<%=itme.user.userpic%>" alt="">
+                 <%}else{%>
+                     <img src="/img/1.jpg" alt="">
+                 <%}%>
+            </a>
+
+        <span class="reply_count pull-left">
+             <span class="count_of_replies" title="回复数"> <%= itme.reply.length %></span>
+             <span class="count_seperator">/</span>
+            <span class="count_of_visits" title='点击数'><%=itme.viewnum%></span>
+        </span>
+      
+        <div class="topic_title_wrapper">
+            <%if(itme.isTop==1){%>
+              <span class='put_top'>置顶</span>
+             <%}else if(itme.isJing==1){%>
+             <span class="put_good">加精</span>
+             <%}else{%>
+             <span class="topiclist-tab"><%=itme.cate.catename%></span>
+             <%}%>
+            <a class='topic_title' href='/topic/<%=itme._id%>' title=' <%=itme.topicname%>'>
+            <%=itme.topicname%>
+             </a>
+            </div>
+        </div>
+       <%})%>
+
+
+</div>
+<div class='pagination' current_page='1'>
+  <ul>
+    <% if(page-2>=0){%>
+        <li ><a href="/?page=<%=parseInt(page)-1%>&cate=<%=cate?cate:''%>">&laquo;</a></li>
+    <%}else{%>
+        <li class="disabled"><a>&laquo;</a></li>
+    <%}%>
+    <% if(page-2>1){%>
+        <li><a >...</a></li>
+    <%}%>
+    <% 
+      var max = page+2;
+      if(max<5){
+        max=5
+      }
+      for(var i=page-2;i<=max;i++){
+      %>
+        <%if(i<1 || i>maxPage){
+            continue;
+         }else{%>
+            <li  class="<%= page==i?'active':''%>"><a href="/?page=<%=i%>&cate=<%=cate?cate:''%>"><%=i%></a></li>
+        <%}%>
+    <%}%>
+    <% if(page+2<maxPage){%>
+        <li><a >...</a></li>
+    <%}%>
+     <% if(page+2<=maxPage){%>
+        <li ><a href="/?page=<%= Number(page+1) %>&cate=<%=cate?cate:''%>">&raquo;</a></li>
+    <%}else{%>
+        <li class="disabled"><a>&raquo;</a></li>
+    <%}%>
+    
+    
+
+    
+
+    
+
+    
+  
+    
+
+    
+    
+  </ul>
+</div>
+
+
+    </div>
+    
+  </div>
+</div>
+
+</div>
+<div id='backtotop'>回到顶部</div>
+<% include layouts/floot %>
+

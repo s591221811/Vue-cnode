@@ -1,0 +1,44 @@
+<% include layouts/header %>
+
+<div class="centercontent tables">
+	<div id="contentwrapper" class="contentwrapper">
+		<div class="contenttitle2">
+        	<h3>类别信息</h3>
+        </div>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+		    <colgroup>
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		    </colgroup>
+		    <thead>
+		        <tr>
+		            <th class="head0">类别序号</th>
+		            <th class="head1">类别名称</th>
+		            <th class="head1">操作</th>
+		    
+		        </tr>
+		    </thead>
+		 
+		    <tbody>
+		    	<% data.forEach(function(item){%>
+					<tr>
+			            <td><%= item.orderNum%></td>
+			            <td><%= item.catename%></td>
+			            <td>
+			            	<a href="/admin/cate/edit/<%= item._id%>">编辑</a>
+			            	<a href="/admin/cate/delete/<%= item._id%>">删除</a>
+			            </td>
+		     		</tr>
+		    	<%})%>
+		    </tbody>
+		</table>
+	</div>
+</div>
+</body>
+<script>
+
+</script>
+</html>

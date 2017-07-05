@@ -1,0 +1,178 @@
+<% include layouts/header %>
+
+
+
+<!-- required 用来判断表单有无数据 无数据不能提交  -->
+<div id='main'>
+  <div id='sidebar'>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>关于</span>
+    </div>
+    <div class='inner'>
+      <p>CNode：Node.js专业中文社区</p>
+
+      <p>在这里你可以：</p>
+      <ul>
+        <li>向别人提出你遇到的问题</li>
+        <li>帮助遇到问题的人</li>
+        <li>分享自己的知识</li>
+        <li>和其它人一起进步</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+        <li><a href="">注册</a></li>
+      </ul>
+    </div>
+    <div class='inner'>
+      
+      <form id='zhuce-form' class='form-horizontal' action='/dozhuce' method='post'>
+        <div class='control-group'>
+          <label class='control-label' for='username'>用户名</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='username'   name='username' size='30' type='text'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for="userpwd">密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id="userpwd"  name="userpwd" size='30' type='password'/>
+            <span></span>
+          </div>
+        </div>
+		<div class='control-group'>
+          <label class='control-label' for="userpwd2">确认密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id="userpwd2"  name="userpwd2" size='30' type='password'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for="emails">电子邮箱</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id="emails"  name="emails" size='30' type='email'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='form-actions'>
+          <input type='submit' class='span-primary' value='登录'/>
+       
+          <a id="forgot_password" href='/search_pass'>取消</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+<div id='backtotop'>回到顶部</div>
+
+<%include layouts/floot %>
+
+<script>
+	// 当用户名表单失去焦点时 判断是否为空 不为空 发送ajax  查询数据库 判断用户名是否可用
+	// 定义验证通过的标志
+	var usernameStat = false;
+	var userpwdStat = false;
+	var userEmailStat = false;
+	// 加载完毕后加载
+	$(function(){
+		$('#username').blur(function(){
+		//console.log(111)
+		// 当前的值
+		var username = $(this).val();
+		// 下一个
+		var usernameObj = $(this).next();
+		if($(this).val().trim()==''){
+			$(this).next().html('用户名不能为空');
+			$(this).next().css({'color':'red'});
+		}else{
+			$.get('/checkUname',{username:username},function(msg){
+					if(msg=='used'){
+						usernameObj.html('用户名已存在');
+						usernameObj.css({'color':'red'});
+					}else if(msg=='ok'){
+						usernameObj.html('√');
+						usernameObj.css({'color':'green'});
+						usernameStat = true;
+					}
+				});
+			}	
+		});
+
+		// 当密码框失去焦点时 判断输入为空 提示密码为空  不为空提示√
+		$('input[name="userpwd"]').blur(function(){
+			//console.log(11)
+			if($(this).val().trim()==''){
+				$(this).next().html('密码不能为空');
+				$(this).next().css({'color':'red'});
+			}else{
+				$(this).next().html('√');
+				$(this).next().css({'color':'green'});
+			}
+		});
+
+		// 当确认密码框失去焦点时 需要判断是否为空 不为空判断是否与密码框内的值一致 不一致提示不一致
+		$('input[name="userpwd2"]').blur(function(){
+			if($(this).val().trim()==''){
+				$(this).next().html('请输入');
+				$(this).next().css({'color':'red'});
+			}else{
+				var userpwd = $('input[name="userpwd"]').val().trim();
+				var userpwd2 = $(this).val().trim();
+				if(userpwd2==userpwd &&userpwd2!=''){
+					$(this).next().html('√');
+					$(this).next().css({'color':'green'});
+					userpwdStat = true;
+				}else{
+					$(this).next().html('输入不正确');
+					$(this).next().css({'color':'red'});
+				}
+			}
+		});
+
+		// 当 email框失去焦点时 首先判断否为空  为空提示为空  不为空发送ajax判断邮箱是否已经注册过了
+		$('input[type="email"]').blur(function(){
+			var userEmail = $(this).val().trim();
+			var next = $(this).next();
+			if($(this).val().trim()==''){
+				$(this).next().html('请输入');
+				$(this).next().css({'color':'red'});
+			}else{
+				$.get('/checkEmail',{userEmail:userEmail},function(msg){
+					if(msg=='used'){
+						next.html('邮箱已存在');
+						next.css({'color':'red'});
+					}else if(msg=='ok'){
+						next.html('√');
+						next.css({'color':'green'});
+						userEmailStat = true;
+					}
+				});
+			}
+		});
+
+		// 当用户账户 密码  邮箱 都验证通过  才能触发表单的提交按钮
+		$('#zhuce-form').submit(function(){
+			var con = usernameStat && userpwdStat && userEmailStat;
+			if(con){
+				
+			}else{
+				return false;
+			}
+		});
+	});
+	
+</script>

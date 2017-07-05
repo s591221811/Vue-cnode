@@ -1,0 +1,295 @@
+<% include layouts/header%>
+<div id='main'>
+  <div id='sidebar'>
+
+	<% include layouts/userInfo %>
+
+  
+  
+  
+
+  
+    
+<div class='panel'>
+  <div class='inner ads'>
+
+    
+      
+      <a href="https://0x6.me/CnodeAD" target="_blank" class="banner sponsor_outlink"
+    data-label="huoqiu">
+        <img src="//dn-cnode.qbox.me/Fh-dDBC360-fT8gaefK0p_hmx_zv">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" class="banner sponsor_outlink"
+    data-label="alinode">
+        <img src="//dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&utm_medium=content_pic_pc&utm_campaign=multicloud&utm_content=gift&ytag=cnodejs" target="_blank" class="banner sponsor_outlink"
+    data-label="ucloud-banner">
+        <img src="//dn-cnode.qbox.me/FgQS-GQDfqwAD_v0NuhyYUOUk5MG">
+      </a>
+    
+  </div>
+</div>
+
+  
+
+  
+
+  
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>友情社区</span>
+    </div>
+    <div class='inner'>
+      <ol class="friendship-community">
+        <li>
+          <a href="https://ruby-china.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://golangtc.com/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/golangtc-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://phphub.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/phphub-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="https://testerhome.com/" target="_blank">
+            <img src="//dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK">
+          </a>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>客户端二维码</span>
+    </div>
+    <div class='inner cnode-app-download'>
+      <img width='200' src="//dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU">
+      <br />
+      <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
+    </div>
+  </div>
+
+</div>
+
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+      </ul>
+    </div>
+    <div class='inner userinfo'>
+
+      <div class='user_big_avatar'>
+		<% if(info.userpic==''){%>
+		      <img src="/img/1.jpg" alt="" style="width:48px; height:48px;">
+		 <%}else{%>
+		     <img src="/<%= info.userpic%>" alt="" style="width:48px; height:48px;">
+		 <%}%>
+      </div>
+      <a class='dark'><%= info.username%></a>
+
+      <div class='user_profile'>
+        <ul class='unstyled'>
+          <span class='big'><%=info.gold%></span> 积分
+          
+          
+          
+          
+          <li>
+            <i class="fa fa-lg fa-fw fa-github"></i>
+            <a class='dark' href="https://github.com/s591221811" target='_blank'>
+              @<%=info.username%>
+            </a>
+          </li>
+          	
+     
+        </ul>
+      </div>
+      <p class='col_fade'>注册时间 <%= timeQ(info.regtime) %></p>
+      
+    </div>
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'><%= user.username==info.username?'我':'他'%>的话题</span>
+    </div>
+    <% if(data.length==0){%>
+	<div class='inner'>
+
+	      <p>无话题</p>
+    </div>
+    <%}else{%>
+    <% data.forEach(function(item){%>
+
+<div class="cell">
+
+<a class="user_avatar pull-left" href="/user/i5ting">
+<% if(item.user.userpic==''){%>
+      <img src="/img/1.jpg" alt="" style="width:48px; height:48px;">
+ <%}else{%>
+     <img src="/<%= item.user.userpic%>" alt="" style="width:48px; height:48px;">
+ <%}%>
+ </a>
+
+<span class="reply_count pull-left">
+<span class="count_of_replies" title="回复数">
+<%= item.reply.length%>
+</span>
+<span class="count_seperator">/</span>
+<span class="count_of_visits" title="点击数">
+<%= item.viewnum%>
+</span>
+</span>
+
+<% if(item.reply.length==0){%>
+
+<%}else{%>
+	<a class="last_time pull-right" href="/topic/593353775b07c1b24afa0638#59338fcb7e057cea7ceb98a2">
+	<img class="user_small_avatar" src="https://avatars0.githubusercontent.com/u/3118295?v=3&amp;s=120">
+	<span class="last_active_time"><%= item.reply%>天前</span>
+	</a>
+<%}%>
+
+
+
+
+<div class="topic_title_wrapper">
+
+
+
+
+<a class="topic_title" href="/topic/593353775b07c1b24afa0638" title="Node Love Rust">
+<%= item.topicname%>
+</a>
+</div>
+</div>
+   <%})%>
+    <%}%>
+    
+    
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'><%= user.username==info.username?'我':'他'%>的收藏</span>
+    </div>
+    
+       <% if(sc.shouC.length==0){%>
+  <div class='inner'>
+
+        <p>无话题</p>
+    </div>
+    <%}else{%>
+    <% sc.shouC.forEach(function(item){%>
+
+<div class="cell">
+
+
+
+
+
+
+<div class="topic_title_wrapper">
+
+
+
+
+<a class="topic_title" href="/topic/593353775b07c1b24afa0638" title="Node Love Rust">
+<%= item.topicname%>
+</a>
+</div>
+</div>
+   <%})%>
+    <%}%>
+    
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    $('#set_star_btn').click(function () {
+      var $me = $(this);
+      var action = $me.attr('action');
+      var params = {
+        user_id: '59270cf09e32cc84569a7397',
+        _csrf: 'D2H9aMLQ-oLnI1-Tmu5ljVdSovK0k2sud0Gw'
+      };
+      $.post('/user/' + action, params, function (data) {
+        if (data.status === 'success') {
+          if (action === 'set_star') {
+            $me.html('取消达人');
+            $me.attr('action', 'cancel_star');
+          } else {
+            $me.html('设为达人');
+            $me.attr('action', 'set_star');
+          }
+        }
+      }, 'json');
+    });
+
+    $('#set_block_btn').click(function () {
+      var $me = $(this);
+      var action = $me.attr('action');
+      var params = {
+        _csrf: 'D2H9aMLQ-oLnI1-Tmu5ljVdSovK0k2sud0Gw',
+        action: action
+      };
+      if (action === 'set_block' && !confirm('确定要屏蔽该用户吗？')) {
+        return;
+      }
+      $.post('/user/s591221811/block', params, function (data) {
+        if (data.status === 'success') {
+          if (action === 'set_block') {
+            $me.html('取消屏蔽用户');
+            $me.attr('action', 'cancel_block');
+          } else if (action === 'cancel_block') {
+            $me.html('屏蔽用户');
+            $me.attr('action', 'set_block');
+          }
+        }
+      }, 'json');
+    })
+
+    $('#delete_all').click(function () {
+      var $me = $(this);
+      var params = {
+        _csrf: 'D2H9aMLQ-oLnI1-Tmu5ljVdSovK0k2sud0Gw',
+      };
+      if (!confirm('确定要删除吗？（不会永久删除，只做标记位）')) {
+        return;
+      }
+      $.post('/user/s591221811/delete_all', params, function (data) {
+        if (data.status === 'success') {
+          alert('操作成功');
+        }
+      }, 'json');
+    })
+  });
+</script>
+
+
+</div>
+<% include layouts/floot%>

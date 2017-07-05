@@ -1,0 +1,336 @@
+
+<!-- 加载公共的头部 -->
+<% include layouts/header%>
+
+<div id='main'>
+  <div id='sidebar'>
+  
+   <% include layouts/userInfo %>
+  
+
+  
+    
+<div class='panel'>
+  <div class='inner ads'>
+
+    
+      
+      <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&utm_medium=content_pic_pc&utm_campaign=multicloud&utm_content=gift&ytag=cnodejs" target="_blank" class="banner sponsor_outlink"
+    data-label="ucloud-banner">
+        <img src="//dn-cnode.qbox.me/FgQS-GQDfqwAD_v0NuhyYUOUk5MG">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="https://0x6.me/CnodeAD" target="_blank" class="banner sponsor_outlink"
+    data-label="huoqiu">
+        <img src="//dn-cnode.qbox.me/Fh-dDBC360-fT8gaefK0p_hmx_zv">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" class="banner sponsor_outlink"
+    data-label="alinode">
+        <img src="//dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_">
+      </a>
+    
+  </div>
+</div>
+
+  
+
+  
+
+  
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>友情社区</span>
+    </div>
+    <div class='inner'>
+      <ol class="friendship-community">
+        <li>
+          <a href="https://ruby-china.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://golangtc.com/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/golangtc-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="http://phphub.org/" target="_blank">
+            <img src="//o4j806krb.qnssl.com/public/images/phphub-logo.png">
+          </a>
+        </li>
+        <div class="sep10"></div>
+        <li>
+          <a href="https://testerhome.com/" target="_blank">
+            <img src="//dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK">
+          </a>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>客户端二维码</span>
+    </div>
+    <div class='inner cnode-app-download'>
+      <img width='200' src="//dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU">
+      <br />
+      <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
+    </div>
+  </div>
+
+</div>
+
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+        <li class='active'>设置</li>
+      </ul>
+    </div>
+    <div class='inner'>
+      
+      
+      <form id='setting_form' class='form-horizontal' action='/user/setting' method='post'>
+        <div class='control-group'>
+          <label class='control-label' for='name'>用户名</label>
+
+          <div class='controls'>
+            <input class='input-xlarge ' id='name' name='name' size='30' type='text' disabled value="<%=user.username%>"/>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='nickname'>昵称</label>
+          <div class='controls'>
+            <input class='input-xlarge readonly' id='nickname' name='nickname' size='30' type='text' value="<%=user.nickname%>"/>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='email'>电子邮件</label>
+
+          <div class='controls'>
+            <input class='input-xlarge ' id='email' name='email' size='30' type='text' disabled value="<%=user.email%>"/>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='gold'>积分</label>
+
+          <div class='controls'>
+            <input class='input-xlarge ' id='gold' name='gold' size='30' type='text'  disabled value="<%=user.gold%>"/>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='mark'>个性签名</label>
+          <div class='controls'>
+            <textarea class='input-xlarge' id='mark' name='mark' size='30'><%=user.mark%></textarea>
+          </div>
+        </div>
+        <div class='form-actions'>
+          <input type='submit' class='span-primary submit_btn'  value='保存设置'/>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>更改头像</span>
+    </div>
+    <div class='inner'>
+      <form id='change_pass_form' class='form-horizontal' action='/user/imgSet' method='post' enctype="multipart/form-data">
+        <div class='control-group'>
+          <label class='control-label' for='new_pass'>选择图片</label>
+          <div class='controls'>
+            <input type="file" class="input-xlarge" name="userpic">
+          </div>
+        </div>
+ 
+
+        <div class='form-actions'>
+          <input type='submit' class='span-primary submit_btn' value='提交'/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>更改邮箱</span>
+    </div>
+    <div class='inner'>
+      <form id='change_pass_form' class='form-horizontal' action='/user/emailSet' method='post'>
+        <div class='control-group'>
+          <label class='control-label' for='old_pass'>当前邮箱</label>
+          <div class='controls'>
+            <p class="form-control-static"><%= user.email %></p>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='new_pass'>新邮箱</label>
+          <div class='controls'>
+            <input class='input-xlarge' type='email' id='email' name='email'/>
+          </div>
+        </div>
+        <div class='form-actions'>
+          <input type='submit' class='span-primary submit_btn' value='发送验证信息'/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>更改密码</span>
+    </div>
+    <div class='inner'>
+      <form id='change_pass_form' class='form-horizontal' action='/user/make' method='post'>
+        <div class='control-group'>
+          <label class='control-label' for='old_pass'>当前密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='text' id='old_pass' name='old_pass' size='30'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='new_pass'>新密码</label>
+            <span></span>
+          <div class='controls'>
+            <input class='input-xlarge' type='text' id='new_pass' name='new_pass' size='30'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='phone'>手机号码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='text' id='phone' name='phone' size='30'/>
+            <span class="btn btn-default" id="sendDx">发送验证码</span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='cNum'>验证码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='text' id='cNum' name='cNum' size='30'/>
+            <span></span>
+        </div>
+        <div class='form-actions'>
+          <input type='submit' class='span-primary submit_btn'  value='更改密码'/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+</div>
+<div id='backtotop'>回到顶部</div>
+
+<!-- 公共的footer -->
+<% include layouts/floot %>
+
+<script>
+    $(function(){
+        $('#old_pass').blur(function(){
+            userpwd = $(this).val();
+            // 下一个
+            var userpwdObj = $(this).next();
+            if($(this).val().trim()==''){
+                $(this).next().html('密码不能为空');
+                $(this).next().css({'color':'red'});
+            }else{
+                $(this).next().html('');
+
+                $.get('/user/checkPwd',{userpwd:userpwd},function(msg){
+                    if(msg=='nok'){
+                        userpwdObj.html('密码不正确');
+                        userpwdObj.css({'color':'red'});  
+                    }
+                    if(msg=='ok'){
+                        userpwdObj.html('√');
+                        userpwdObj.css({'color':'green'});
+                    }
+                });
+            }   
+        });
+
+        $('#new_pass').blur(function(){
+            // console.log(11)
+            newpwd = $(this).val().trim();
+            if($(this).val().trim()==''){
+                $(this).next().html('密码不能为空');
+                $(this).next().css({'color':'red'});
+            }else{
+               $(this).next().html('');
+            }
+           
+        });
+        // 验证码
+        var yzm;
+        var isClick = false;
+        $('#sendDx').click(function(){
+            // 获取上一个元素的值 
+            if(isClick){
+              return false;
+            }
+            // console.log(111);
+            var phNum = $(this).prev().val().trim();
+            if(phNum==''){
+                $(this).prev().prop({placeholder:'手机号不能为空'});
+                return false;
+            }
+            //  console.log(phNum);
+            $.get('/user/sendDx',{phNum:phNum},function(msg){
+                // console.log(msg);
+                isClick = true;
+                var yzm = msg;
+                sendYz();
+                //console.log(yzm);
+            });
+        });
+        // 验证码倒计时
+        var run;
+        function sendYz(){
+            if(run){
+              return;
+            }
+            var num = 60;
+            run = setInterval(function(){
+               $('#sendDx').text(num+'后重新发送');
+                $('#sendeDx').removeClass('btn');
+                num--;
+              if(num <= 0){
+                 clearInterval(run);
+                 run = undefined;
+                 $('#sendDx').text('发送验证码');
+                 isClick = false;
+              }
+            },1000)
+        }
+
+        $('#cNum').blur(function(){
+            if($(this).val().trim()==''){
+                $(this).next().html('验证码不能为空');
+                $(this).next().css({'color':'red'});
+            }else{
+                $(this).next().html('');
+               
+            }
+        });
+
+
+    })
+</script>

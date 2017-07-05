@@ -1,0 +1,54 @@
+<% include layouts/header %>
+
+<div class="centercontent tables">
+	<div id="contentwrapper" class="contentwrapper">
+		<div class="contenttitle2">
+        	<h3>用户信息</h3>
+        </div>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+		    <colgroup>
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		    </colgroup>
+		    <thead>
+		        <tr>
+		            <th class="head0">用户名</th>
+		            <th class="head1">积分</th>
+		            <th class="head0">等级</th>
+		            <th class="head1">操作</th>
+		    
+		        </tr>
+		    </thead>
+		 
+		    <tbody>
+		    	<% data.forEach(function(item){%>
+					<tr>
+			            <td><%= item.username%></td>
+			            <td><%= item.gold%></td>
+			            <td><%= item.level==0?'普通会员':(item.level==1?'管理员':'')%></td>
+			            <td class="center">
+			            	<% if(item.feng==1){%>
+			            	<a href="/admin/user/set?_id=<%= item._id%>" class="stdbtn btn_red">封号</a>
+			            	<%}else{%>
+							<a href="/admin/user/set?_id=<%= item._id%>" class="stdbtn btn_red">解封</a>
+			            	<%	} %>
+			            	<% if(item.level==1){%>
+			            	<a href="/admin/user/setAdmin?_id=<%= item._id%>" class="stdbtn btn_red">降为普通会员</a>
+			            	<%}else{%>
+							<a href="/admin/user/setAdmin?_id=<%= item._id%>" class="stdbtn btn_red">升为管理员</a>
+			            	<%	} %>
+			            </td>
+		     		</tr>
+		    	<%})%>
+		    </tbody>
+		</table>
+	</div>
+</div>
+</body>
+<script>
+
+</script>
+</html>

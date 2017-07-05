@@ -1,0 +1,127 @@
+<% include layouts/header %>
+
+
+
+<!-- required 用来判断表单有无数据 无数据不能提交  -->
+<div id='main'>
+  <div id='sidebar'>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>关于</span>
+    </div>
+    <div class='inner'>
+      <p>CNode：Node.js专业中文社区</p>
+
+      <p>在这里你可以：</p>
+      <ul>
+        <li>向别人提出你遇到的问题</li>
+        <li>帮助遇到问题的人</li>
+        <li>分享自己的知识</li>
+        <li>和其它人一起进步</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+        <li><a href="">重置</a></li>
+      </ul>
+    </div>
+    <div class='inner'>
+      
+      <form id='signin_form' class='form-horizontal' id="reset" action='/doreset' method='post'>
+        <% if(errInfo.length>0){%>
+      <div class="alert alert-danger alert-dismissible" style="margin-top:-40px">
+        <%= errInfo.toString() %>
+        <span class="close" data-dismiss="alert">&times;</span>
+          </div>
+        <%} %>
+        <div class='control-group'>
+          <label class='control-label' for='username'>用户名</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='username'   name='username' size='30' type='text'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for="email">注册邮箱</label>
+          <div class='controls'>
+            <input class='input-xlarge' id="email"  name="email" size='30' type='email'/>
+            <span></span>
+          </div>
+        </div>
+        <div class='form-actions'>
+          <input type='submit' id="resetC" class='span-primary submit_btn' value='发送验证信息'/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+<div id='backtotop'>回到顶部</div>
+
+<script>
+    $(function(){
+        var userstats = false;
+        var emailStats = false;
+        $('#username').blur(function(){
+            // 当前的值
+            var username = $(this).val();
+            // 下一个
+            var usernameObj = $(this).next();
+            if($(this).val().trim()==''){
+                $(this).next().html('用户名不能为空');
+                $(this).next().css({'color':'red'});
+            }else{
+            $.get('/checkUname',{username:username},function(msg){
+                if(msg=='used'){
+                     usernameObj.html('√');
+                    usernameObj.css({'color':'green'});
+                    userstats=true;
+                }else if(msg=='ok'){
+                    usernameObj.html('用户名不存在');
+                    usernameObj.css({'color':'red'});
+                }
+            });
+            } 
+        });
+
+        $('input[type="email"]').blur(function(){
+            var userEmail = $(this).val().trim();
+            var next = $(this).next();
+            if($(this).val().trim()==''){
+                $(this).next().html('请输入');
+                $(this).next().css({'color':'red'});
+            }else{
+                $.get('/checkEmail',{userEmail:userEmail},function(msg){
+                    if(msg=='used'){
+                       next.html('√');
+                        next.css({'color':'green'}); 
+                        emailStats=true;
+                    }else if(msg=='ok'){
+                        next.html('邮箱不存在');
+                        next.css({'color':'red'});
+                    }
+                });
+            }
+        });
+
+        $('#resetC').click(function(){
+            if(userstats&&emailStats){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>
+
+<%include layouts/floot %>
+
+

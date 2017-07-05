@@ -1,0 +1,338 @@
+<% include layouts/header%>
+<div id='main'>
+  <div id='sidebar'>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>作者</span>
+    </div>
+    <div class='inner'>
+      <div class='user_card'>
+  <div>
+    <a class='user_avatar' href="/user/<%=data.user._id%>">
+    	<% if(data.user.userpic){%>
+			<img src="/<%=data.user.userpic%>" alt="">
+    	<%}else{%>
+			<img src="/img/1.jpg" alt="">
+    	<%}%>
+    </a>
+    <span class='user_name'><a class='dark' href="/user/<%=data.user._id%>"><%=data.user.nickname%></a></span>
+
+    <div class='board clearfix'>
+      <div class='floor'>
+        <span class='big'>积分:<%=data.user.gold%></span>
+      </div>
+    </div>
+    <div class="space clearfix"></div>
+    <span class="signature">
+        “
+        
+           <%=data.user.mark?data.user.mark:'这个人很懒,什么有没有留下'%>
+        
+        ”
+    </span>
+  </div>
+</div>
+
+
+
+
+
+    </div>
+  </div>
+
+  
+    
+<div class='panel'>
+  <div class='inner ads'>
+
+    
+      
+      <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" class="banner sponsor_outlink"
+    data-label="alinode">
+        <img src="//dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&utm_medium=content_pic_pc&utm_campaign=multicloud&utm_content=gift&ytag=cnodejs" target="_blank" class="banner sponsor_outlink"
+    data-label="ucloud-banner">
+        <img src="//dn-cnode.qbox.me/FgQS-GQDfqwAD_v0NuhyYUOUk5MG">
+      </a>
+    
+      
+        <div class="sep10"></div>
+      
+      <a href="https://0x6.me/CnodeAD" target="_blank" class="banner sponsor_outlink"
+    data-label="huoqiu">
+        <img src="//dn-cnode.qbox.me/Fh-dDBC360-fT8gaefK0p_hmx_zv">
+      </a>
+    
+  </div>
+</div>
+
+  
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>作者其它话题</span>
+    </div>
+    <div class='inner'>
+      
+      <ul class='unstyled'>
+      <% other.forEach(function(item){%>
+		<li>
+		  <div><a class='dark topic_title' href="/topic/<%=item._id%>" title=""><%=item.topicname%></a>
+		  </div>
+		</li>
+  	  <%})%>
+        
+
+
+      </ul>
+      
+    </div>
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>无人回复的话题</span>
+    </div>
+    <div class='inner'>
+      
+      <ul class='unstyled'>
+      <% nores.forEach(function(item){%>
+  <li>
+  <div><a class='dark topic_title' href="/topic/592e987f855efbac2cf7a51e" title="<%=item.topicname%>"><%=item.topicname%></a>
+  </div>
+</li>
+
+        <%})%>
+        
+
+
+      </ul>
+      
+    </div>
+  </div>
+</div>
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header topic_header'>
+      <span class="topic_full_title">
+
+       <%if(data.isTop==1){%>
+		<span class='put_top'>置顶</span>
+       	<%}else if(data.isJing==1){%>
+		<span class="put_good">加精</span>
+       	<%}else{%>
+		<span class="topiclist-tab"><%=data.cate.catename%></span>
+       	<%}%>
+
+       <%=data.topicname%>
+      </span>
+      <div class="changes">
+        <span>
+       		
+        </span>
+        <span>
+          作者 <a href="/user/i5ting"><%=data.user.username%></a>
+        </span>
+        <span>
+        	<%=data.viewnum%>次
+        </span>
+        
+          <span>
+            最后一次编辑是 11 小时前
+          </span>
+        
+        
+          <span>来自<%=data.cate.catename%></span>
+        
+
+     
+        <%if(user){%>
+			   <input class="span-common span-success pull-right collect_btn" type="submit" value="<%= user.shouC.indexOf(''+data._id)==-1?'收藏':'取消收藏'%>" style="background:<%= user.shouC.indexOf(''+data._id)==-1?'#6ba44e':'gray'%>"action="collect" id="showC" data-topic="<%=data._id%>">
+        <%}%>
+         
+        
+
+      </div>
+      <%if(user){%>
+      <%if(''+data.user._id==''+user._id){%>
+      <div id="manage_topic">
+          <a href="/topic/edit/<%=data._id%>">
+            <i class="glyphicon glyphicon-edit" title="编辑"></i></a>
+          <a   class="delete_topic_btn" href="/topic/delete/<%=data._id%>">
+             <i class="glyphicon glyphicon-trash" title="删除"></i></a>
+      </div>
+      <%}%>
+      <%}%>
+    </div>
+    <div class='inner topic'>
+
+      <div class='topic_content'>
+        <div class="markdown-text">
+        	<%- data.content%>
+		</div>
+      </div>
+    </div>
+  </div>
+ <% if(data.reply.length>0){%> 
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'><%= data.reply.length%> 回复</span>
+    </div>
+<%replydata.forEach(function(item){  %>
+<div class='cell reply_area reply_item
+reply_highlight'
+reply_id="<%= item._id%>" reply_to_id="" id="59292162d371b6372a8afe93">
+<div class='author_content'>
+<a href="/user/1340641314" class="user_avatar">
+  <% if(item.user.userpic){%>
+      <img src="/<%=item.user.userpic%>" alt="">
+  <%}else{%>
+      <img src="/img/1.jpg" alt="">
+  <%}%>
+</a>
+
+<div class='user_info'>
+<a class='dark reply_author' href="/user/1340641314"><%=item.user.username%></a>
+<a class="reply_time" href="#59292162d371b6372a8afe93"><%=item.lou%>楼•4 天前</a>
+
+</div>
+<div class='user_action'>
+    <span>
+    <% if(item.like.length>0){ %>
+    <i class="glyphicon glyphicon-thumbs-up like" title="喜欢"></i>
+    <%}else if(item.like.length==0 && user){ %>
+    <i class="glyphicon glyphicon-thumbs-up like" style="display:none" title="喜欢"></i>
+    <%}%>
+
+
+    <span class="up-count"><%= item.like.length>0?item.like.length:'' %></span>
+    </span>
+
+<span>
+
+<i class="fa fa-reply reply2_btn" title="回复"></i>
+
+</span>
+</div>
+</div>
+<div class='reply_content from-1340641314'>
+<div class="markdown-text"><p><%= item.content%></p>
+
+</div>
+</div>
+</div>
+<%})%>
+
+</div>
+<%}%>
+  
+  <% if(user){%>
+    <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>添加回复</span>
+    </div>
+    <div class='inner reply'>
+      <form id='reply_form' action='/topic/reply/<%=data._id%>' method='post'>
+
+        <div class='markdown_editor in_editor'>
+          <div class='markdown_in_editor'>
+            <textarea class='editor' name='content' rows='8'></textarea>
+
+            <div class='editor_buttons'>
+              <input class='span-primary submit_btn' type="submit" data-loading-text="回复中.." value="回复" >
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <%}%>
+  
+</div>
+</div>
+<script>
+    $(function(){
+        $('.cell').hover(function(){
+            if($(this).find('.like').length!=0){
+                $(this).find('.like').css('display','inline-block')
+            }
+        },function(){
+             if($(this).find('.like').length!=0){
+                $(this).find('.like').css('display','none')
+            }
+        });
+
+        $('.like').click(function(){
+            var replyId = $(this).parents('.cell').attr('reply_id');
+            // console.log(replyId);
+            var likeThis = $(this);
+           $.get('/topic/clickGd',{reply:replyId},function(msg){
+            // console.log(msg);
+
+            if(msg=='like'){
+                // 说明点赞
+                // 设置小手显示
+                // 点赞的数量当前值+1
+                // console.log(likeThis.next().html());
+
+                // 判断之前是否有值
+                if(likeThis.next().html()==""){
+                    likeThis.next().html(1);
+                }else{
+                     likeThis.next().html(parseInt(likeThis.next().html())+1);   
+                }
+               
+               // 小手显示
+               likeThis.css('display','inline-block');
+            }else if(msg=='likecancel'){
+                var newLikeNum = parseInt(likeThis.next().html())-1;
+
+                // 判断
+                if(newLikeNum>0){
+                    likeThis.next().html(newLikeNum);
+                }else{
+                    // 小手消失
+                    // 当前点赞的位置变成空
+                    likeThis.css('display','none');
+                    likeThis.next().html('');
+                }
+                
+              }
+             });  
+        });
+
+
+      // 定义收藏
+      $('#showC').click(function(){
+        // console.log(1111)
+        var con = $(this).attr('data-topic')
+        var thisO = $(this);
+        if($(this).val()=="收藏"){
+          console.log(1111)
+          $.get('/topic/sC',{_id:con},function(msg){
+                if(msg=='ok'){
+                  thisO.val('取消收藏');
+                  thisO.css('background','gray');
+                }
+          });
+        }
+         if($(this).val()=="取消收藏"){
+          // console.log(1111)
+          $.get('/topic/nsC',{_id:con},function(msg){
+                if(msg=='ok'){
+                  thisO.val('收藏');
+                  thisO.css('background','#6ba44e');
+                }
+          });
+        }
+      })
+    });
+</script>
+<% include layouts/floot%>

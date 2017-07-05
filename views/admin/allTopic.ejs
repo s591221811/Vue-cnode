@@ -1,0 +1,48 @@
+<% include layouts/header %>
+
+<div class="centercontent tables">
+	<div id="contentwrapper" class="contentwrapper">
+		<div class="contenttitle2">
+        	<h3>类别信息</h3>
+        </div>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+		    <colgroup>
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		        <col class="con1">
+		        <col class="con0">
+		    </colgroup>
+		    <thead>
+		        <tr>
+		            <th class="head0">话题名</th>
+		            <th class="head1">所属类别</th>
+		            <th class="head1">所属用户</th>
+		            <th class="head1">操作</th>
+		        </tr>
+		    </thead>
+		 
+		    <tbody>
+		    	
+		    	<% data.forEach(function(item){%>
+					<tr>
+						
+						<td><%= item.topicname%></td>
+						<td><%= item.cate.catename%></td>
+						<td><%= item.user.username%></td>
+						<td>
+						<a href="/admin/topic/isJing/<%= item._id%>" class="stdbtn btn_red"><%= parseInt(item.isJing)==1?'已加精':'加精'%></a>
+						<a href="/admin/topic/isTop/<%= item._id%>" class="stdbtn btn_red"><%= parseInt(item.isTop)==1?'已置顶':'置顶'%></a>
+						<a href="/admin/topic/delete/<%= item._id%>" class="stdbtn btn_red">删除</a>
+						</td>
+					</tr>
+		    	<%})%>
+		    </tbody>
+		</table>
+	</div>
+</div>
+</body>
+<script>
+
+</script>
+</html>
